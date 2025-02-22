@@ -6,9 +6,11 @@ services:
     container_name: nginx-container
     ports:
       - "5555:80"
+    volumes:
+      - ./nginx/html:/usr/share/nginx/html  # Mount custom webpage located in (./nginx/html) to nginx's html directory
     depends_on:
       - postgres # Ensures PostgreSQL starts first 
-      
+
   postgres:
     image: postgres
     container_name: postgres-container
