@@ -1,0 +1,23 @@
+version: "3.8"
+
+services:
+  nginx:
+    image: nginx
+    container_name: nginx-container
+    ports:
+      - "5555:80"
+    depends_on:
+      - postgres # Ensures PostgreSQL starts first 
+      
+  postgres:
+    image: postgres
+    container_name: postgres-container
+    env_file:
+      - .env # Loads database login credentials from .env file
+    volumes:
+      - postgres_data:/var/lib/postgresql/postgres_data
+    ports:
+      - "5432:5432"
+
+volumes:
+  postgres_data:
